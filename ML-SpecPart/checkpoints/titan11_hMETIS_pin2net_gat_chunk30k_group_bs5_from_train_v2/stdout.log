@@ -1,0 +1,125 @@
+seed: 7532
+Namespace(data_root='/export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/rawdata_titan11_hMETIS_fixed_links', checkpoint='titan11_hMETIS_pin2net_gat_chunk30k_group_bs5_from_train_v2', resume=False, resume_from='/export/home/keli/ZPJ/par/ML-SpecPart/checkpoints/titan11_hMETIS_pin2net_gat_chunk30k_topk50_normov_v1/best_model_graph_split.pth', batch_size=5, pin_base_dim=2, net_base_dim=1, hidden_dim=128, layers=3, epochs=100, lr=0.0001, use_node2vec=False, use_node2vec_disk_cache=False, use_pagerank=True, pin_struct_feat_mode='hetero', prune_overlap_topk=50, prune_overlap_min_weight=0, normalize_overlap_weights=True, use_ubfactor=True, ub_isolate=True, ub_max=20, save_predictions=False, dataset_savepath='/export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/cache/titan11_hMETIS_fixed_pr_ubiso_topk50_normov', eval_weighted_metrics=False, grouped_encode_once=False, pin2net_type='gat', pin2net_gat_heads=4, pin2net_gat_feat_drop=0.0, pin2net_gat_attn_drop=0.0, pin2net_gat_chunk_nets=30000, net2net_type='graphconv', net2net_gat_heads=4, net2net_gat_feat_drop=0.0, net2net_gat_attn_drop=0.0, net2pin_type='graphconv', net2pin_gat_heads=4, net2pin_gat_feat_drop=0.0, net2pin_gat_attn_drop=0.0)
+NetPredictor(
+  (pin_projector): Linear(in_features=5, out_features=128, bias=True)
+  (net_projector): Linear(in_features=1, out_features=128, bias=True)
+  (layers): ModuleList(
+    (0-2): 3 x ThreeStageGNNLayer(
+      (conv_pin2net): GATConv(
+        (fc_src): Linear(in_features=128, out_features=128, bias=False)
+        (fc_dst): Linear(in_features=128, out_features=128, bias=False)
+        (feat_drop): Dropout(p=0.0, inplace=False)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (leaky_relu): LeakyReLU(negative_slope=0.2)
+      )
+      (conv_net2net): GraphConv(in=128, out=128, normalization=right, activation=None)
+      (conv_net2pin): GraphConv(in=128, out=128, normalization=right, activation=None)
+      (norm_net_1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (norm_net_2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (norm_pin): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+    )
+  )
+  (predictor): Sequential(
+    (0): Linear(in_features=129, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.2, inplace=False)
+    (3): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+Scanning /export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/rawdata_titan11_hMETIS_fixed_links for designs...
+Loaded prebuilt dataset from /export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/cache/titan11_hMETIS_fixed_pr_ubiso_topk50_normov (designs=11, solutions=4399)
+Dataset: 4399 solutions, 11 train groups
+Split: Train 3519, Val 439, Test 441
+Loaded model weights from /export/home/keli/ZPJ/par/ML-SpecPart/checkpoints/titan11_hMETIS_pin2net_gat_chunk30k_topk50_normov_v1/best_model_graph_split.pth, but no optimizer/epoch state was found. Training will restart the optimizer from epoch 0.
+
+--- Start Group-by-Group Training (one step per batch) ---
+Epoch 000 | Train Loss: 0.0077 | Val Loss: 0.0087 | Val P: 0.8424 | Val R: 0.4706 | Val F1: 0.6039
+Epoch 005 | Train Loss: 0.0075 | Val Loss: 0.0088 | Val P: 0.8474 | Val R: 0.4697 | Val F1: 0.6044
+Epoch 010 | Train Loss: 0.0075 | Val Loss: 0.0088 | Val P: 0.8956 | Val R: 0.4063 | Val F1: 0.5590
+Epoch 015 | Train Loss: 0.0075 | Val Loss: 0.0095 | Val P: 0.8471 | Val R: 0.4559 | Val F1: 0.5928
+Epoch 020 | Train Loss: 0.0074 | Val Loss: 0.0088 | Val P: 0.8482 | Val R: 0.4541 | Val F1: 0.5915
+Epoch 025 | Train Loss: 0.0074 | Val Loss: 0.0086 | Val P: 0.8264 | Val R: 0.4856 | Val F1: 0.6117
+seed: 7291
+Namespace(data_root='/export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/rawdata_titan11_hMETIS_fixed_links', checkpoint='titan11_hMETIS_pin2net_gat_chunk30k_group_bs5_from_train_v2', resume=True, resume_from=None, batch_size=5, pin_base_dim=2, net_base_dim=1, hidden_dim=128, layers=3, epochs=100, lr=0.0001, use_node2vec=False, use_node2vec_disk_cache=False, use_pagerank=True, pin_struct_feat_mode='hetero', prune_overlap_topk=50, prune_overlap_min_weight=0, normalize_overlap_weights=True, use_ubfactor=True, ub_isolate=True, ub_max=20, save_predictions=False, dataset_savepath='/export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/cache/titan11_hMETIS_fixed_pr_ubiso_topk50_normov', eval_weighted_metrics=False, grouped_encode_once=False, pin2net_type='gat', pin2net_gat_heads=4, pin2net_gat_feat_drop=0.0, pin2net_gat_attn_drop=0.0, pin2net_gat_chunk_nets=30000, net2net_type='graphconv', net2net_gat_heads=4, net2net_gat_feat_drop=0.0, net2net_gat_attn_drop=0.0, net2pin_type='graphconv', net2pin_gat_heads=4, net2pin_gat_feat_drop=0.0, net2pin_gat_attn_drop=0.0)
+NetPredictor(
+  (pin_projector): Linear(in_features=5, out_features=128, bias=True)
+  (net_projector): Linear(in_features=1, out_features=128, bias=True)
+  (layers): ModuleList(
+    (0-2): 3 x ThreeStageGNNLayer(
+      (conv_pin2net): GATConv(
+        (fc_src): Linear(in_features=128, out_features=128, bias=False)
+        (fc_dst): Linear(in_features=128, out_features=128, bias=False)
+        (feat_drop): Dropout(p=0.0, inplace=False)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (leaky_relu): LeakyReLU(negative_slope=0.2)
+      )
+      (conv_net2net): GraphConv(in=128, out=128, normalization=right, activation=None)
+      (conv_net2pin): GraphConv(in=128, out=128, normalization=right, activation=None)
+      (norm_net_1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (norm_net_2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (norm_pin): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+    )
+  )
+  (predictor): Sequential(
+    (0): Linear(in_features=129, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.2, inplace=False)
+    (3): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+Scanning /export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/rawdata_titan11_hMETIS_fixed_links for designs...
+Loaded prebuilt dataset from /export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/cache/titan11_hMETIS_fixed_pr_ubiso_topk50_normov (designs=11, solutions=4399)
+Dataset: 4399 solutions, 11 train groups
+Split: Train 3519, Val 439, Test 441
+seed: 287
+Namespace(data_root='/export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/rawdata_titan11_hMETIS_fixed_links', checkpoint='titan11_hMETIS_pin2net_gat_chunk30k_group_bs5_from_train_v2', resume=True, resume_from=None, batch_size=5, pin_base_dim=2, net_base_dim=1, hidden_dim=128, layers=3, epochs=100, lr=0.0001, use_node2vec=False, use_node2vec_disk_cache=False, use_pagerank=True, pin_struct_feat_mode='hetero', prune_overlap_topk=50, prune_overlap_min_weight=0, normalize_overlap_weights=True, use_ubfactor=True, ub_isolate=True, ub_max=20, save_predictions=False, dataset_savepath='/export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/cache/titan11_hMETIS_fixed_pr_ubiso_topk50_normov', eval_weighted_metrics=False, grouped_encode_once=False, pin2net_type='gat', pin2net_gat_heads=4, pin2net_gat_feat_drop=0.0, pin2net_gat_attn_drop=0.0, pin2net_gat_chunk_nets=30000, net2net_type='graphconv', net2net_gat_heads=4, net2net_gat_feat_drop=0.0, net2net_gat_attn_drop=0.0, net2pin_type='graphconv', net2pin_gat_heads=4, net2pin_gat_feat_drop=0.0, net2pin_gat_attn_drop=0.0)
+NetPredictor(
+  (pin_projector): Linear(in_features=5, out_features=128, bias=True)
+  (net_projector): Linear(in_features=1, out_features=128, bias=True)
+  (layers): ModuleList(
+    (0-2): 3 x ThreeStageGNNLayer(
+      (conv_pin2net): GATConv(
+        (fc_src): Linear(in_features=128, out_features=128, bias=False)
+        (fc_dst): Linear(in_features=128, out_features=128, bias=False)
+        (feat_drop): Dropout(p=0.0, inplace=False)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (leaky_relu): LeakyReLU(negative_slope=0.2)
+      )
+      (conv_net2net): GraphConv(in=128, out=128, normalization=right, activation=None)
+      (conv_net2pin): GraphConv(in=128, out=128, normalization=right, activation=None)
+      (norm_net_1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (norm_net_2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      (norm_pin): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+    )
+  )
+  (predictor): Sequential(
+    (0): Linear(in_features=129, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.2, inplace=False)
+    (3): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+Scanning /export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/rawdata_titan11_hMETIS_fixed_links for designs...
+Loaded prebuilt dataset from /export/home/keli/ZPJ/par/ML-SpecPart/HyperCutNet/cache/titan11_hMETIS_fixed_pr_ubiso_topk50_normov (designs=11, solutions=4399)
+Dataset: 4399 solutions, 11 train groups
+Split: Train 3519, Val 439, Test 441
+Resumed full checkpoint from ../checkpoints/titan11_hMETIS_pin2net_gat_chunk30k_group_bs5_from_train_v2/last_checkpoint.pth | start_epoch=26 | best_val_f1=0.6117
+
+--- Start Group-by-Group Training (one step per batch) ---
+Epoch 030 | Train Loss: 0.0074 | Val Loss: 0.0088 | Val P: 0.8593 | Val R: 0.4553 | Val F1: 0.5952
+Epoch 035 | Train Loss: 0.0074 | Val Loss: 0.0087 | Val P: 0.8582 | Val R: 0.4528 | Val F1: 0.5928
+Epoch 040 | Train Loss: 0.0073 | Val Loss: 0.0090 | Val P: 0.8550 | Val R: 0.4586 | Val F1: 0.5970
+Epoch 045 | Train Loss: 0.0074 | Val Loss: 0.0087 | Val P: 0.7995 | Val R: 0.4844 | Val F1: 0.6033
+Epoch 050 | Train Loss: 0.0074 | Val Loss: 0.0100 | Val P: 0.8095 | Val R: 0.4443 | Val F1: 0.5737
+Epoch 055 | Train Loss: 0.0073 | Val Loss: 0.0091 | Val P: 0.8398 | Val R: 0.4703 | Val F1: 0.6030
+Epoch 060 | Train Loss: 0.0074 | Val Loss: 0.0092 | Val P: 0.8682 | Val R: 0.3627 | Val F1: 0.5116
+Epoch 065 | Train Loss: 0.0073 | Val Loss: 0.0089 | Val P: 0.8487 | Val R: 0.4486 | Val F1: 0.5869
+Epoch 070 | Train Loss: 0.0073 | Val Loss: 0.0087 | Val P: 0.8749 | Val R: 0.4322 | Val F1: 0.5786
+Epoch 075 | Train Loss: 0.0073 | Val Loss: 0.0089 | Val P: 0.8119 | Val R: 0.4813 | Val F1: 0.6043
+Epoch 080 | Train Loss: 0.0073 | Val Loss: 0.0089 | Val P: 0.8642 | Val R: 0.4291 | Val F1: 0.5735
+Epoch 085 | Train Loss: 0.0073 | Val Loss: 0.0089 | Val P: 0.8284 | Val R: 0.4713 | Val F1: 0.6008
+Epoch 090 | Train Loss: 0.0073 | Val Loss: 0.0095 | Val P: 0.8865 | Val R: 0.3795 | Val F1: 0.5315
+Epoch 095 | Train Loss: 0.0073 | Val Loss: 0.0086 | Val P: 0.8354 | Val R: 0.4597 | Val F1: 0.5930
+
+--- Final Testing ---
+Test Precision: 0.8268 | Test Recall: 0.4698 | Test F1: 0.5991
