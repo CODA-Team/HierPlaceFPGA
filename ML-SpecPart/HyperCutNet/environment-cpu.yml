@@ -1,0 +1,21 @@
+name: gnn_design_cpu
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.10
+  - numpy<2
+  - scipy
+  - networkx
+  - tqdm
+  - scikit-learn
+  - pip
+  - pytorch=2.1.2
+  - torchvision=0.16.2
+  - torchaudio=2.1.2
+  - cpuonly
+  - pip:
+      - dgl==1.1.3
+      - torchdata==0.7.1

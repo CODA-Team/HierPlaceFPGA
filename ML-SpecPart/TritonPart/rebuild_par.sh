@@ -7,14 +7,18 @@ set -euo pipefail
 #   ./rebuild_par.sh openroad         # build openroad
 #   ./rebuild_par.sh all              # build par + openroad
 #   ./rebuild_par.sh openroad 16      # build with 16 jobs
+#
+# Optional environment variables:
+#   BUILD_DIR=/path/to/build          # default: ./build
+#   GCC13_PREFIX=/path/to/toolchain   # optional compiler/Boost prefix
 
 TARGET="${1:-par}"
 JOBS="${2:-8}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OR_SRC="${SCRIPT_DIR}/OpenROAD"
-BUILD_DIR="${SCRIPT_DIR}/build_gcc13"
-GCC13_PREFIX="/home/thermal/.local/share/mamba/envs/gcc13"
+BUILD_DIR="${BUILD_DIR:-${SCRIPT_DIR}/build}"
+GCC13_PREFIX="${GCC13_PREFIX:-}"
 
 case "${TARGET}" in
   par|openroad|all) ;;
@@ -25,18 +29,28 @@ case "${TARGET}" in
 esac
 
 echo "[INFO] Configuring CMake in ${BUILD_DIR}"
-cmake -S "${OR_SRC}" -B "${BUILD_DIR}" \
+cmake_args=(
+  -S "${OR_SRC}"
+  -B "${BUILD_DIR}"
   -DCMAKE_BUILD_TYPE=RELEASE \
-  -DCMAKE_CXX_COMPILER="${GCC13_PREFIX}/bin/g++" \
-  -DCMAKE_C_COMPILER="${GCC13_PREFIX}/bin/gcc" \
-  -DCMAKE_PREFIX_PATH="${GCC13_PREFIX}" \
-  -DBoost_ROOT="${GCC13_PREFIX}" \
-  -DBoost_DIR="${GCC13_PREFIX}/lib/cmake/Boost-1.85.0" \
-  -DBoost_NO_SYSTEM_PATHS=ON \
   -DBUILD_PYTHON=OFF \
   -DBUILD_GUI=OFF \
   -DBUILD_TCLX=ON \
   -DBUILD_DST=OFF
+)
+
+if [[ -n "${GCC13_PREFIX}" ]]; then
+  cmake_args+=(
+    -DCMAKE_CXX_COMPILER="${GCC13_PREFIX}/bin/g++"
+    -DCMAKE_C_COMPILER="${GCC13_PREFIX}/bin/gcc"
+    -DCMAKE_PREFIX_PATH="${GCC13_PREFIX}"
+    -DBoost_ROOT="${GCC13_PREFIX}"
+    -DBoost_DIR="${GCC13_PREFIX}/lib/cmake/Boost-1.85.0"
+    -DBoost_NO_SYSTEM_PATHS=ON
+  )
+fi
+
+cmake "${cmake_args[@]}"
 
 if [[ "${TARGET}" == "par" || "${TARGET}" == "all" ]]; then
   echo "[INFO] Building target: par"

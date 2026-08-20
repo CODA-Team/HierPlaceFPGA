@@ -43,15 +43,15 @@ Requires **PyTorch**, **DGL**, **NetworkX**, and **scikit-learn**. Optional: **n
 
 1.  **Clone the repository**
     ```bash
-    git clone https://github.com/your-username/ML-SpecPart.git
-    cd ML-SpecPart
+    git clone --recursive https://github.com/CODA-Team/HierPlaceFPGA.git
+    cd HierPlaceFPGA/ML-SpecPart/HyperCutNet
     ```
 
 2.  **Create the environment**
     You can create the environment using the provided `environment.yml`. This setup defaults to **CUDA 12.1**.
     ```bash
-    conda env create -f environment.yml
-    conda activate gnn_design
+    conda env create -f environment-cpu.yml
+    conda activate gnn_design_cpu
     ```
 
 ### Option 2: Manual Install
@@ -72,7 +72,7 @@ If you prefer pip or use a different CUDA version (e.g., CPU-only or CUDA 11.8),
 
 3.  **Install other dependencies**
     ```bash
-    pip install numpy scipy tqdm
+    pip install numpy scipy networkx tqdm scikit-learn
     ```
 
 ## 🏃‍♂️ Usage

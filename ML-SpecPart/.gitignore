@@ -1,0 +1,33 @@
+# Python and Conda runtime files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+
+# Julia runtime files
+.julia/
+*.ji
+
+# Generated HyperCutNet features and experiment outputs
+HyperCutNet/node2vec_disk_cache/
+HyperCutNet/dataset/
+outputs/
+experiments/
+experiments_*/
+*.log
+*.tmp
+core.*
+
+# Local OpenROAD/TritonPart build products
+TritonPart/build/
+TritonPart/build_*/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Editor and operating-system files
+.DS_Store
+.vscode/
+.idea/

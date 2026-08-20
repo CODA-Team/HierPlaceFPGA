@@ -4,7 +4,6 @@ Run HyperCutNet inference on a single graph and write cut probabilities.
 
 Usage:
   python inference.py --graph_dir <dir_with_nodes_hedges> --checkpoint <model.pth> -o cut_prob.txt
-  python inference.py --graph_dir <dir> -o cut_prob.txt  # no checkpoint: outputs 0.5 for all (dummy)
 
 Input: graph_dir must contain nodes.txt and hedges.txt (HyperCutNet format).
 Output: One float per line, in hyperedge order; line i = P(net i is cut).
@@ -165,7 +164,8 @@ def run_inference(graph_dir: str, checkpoint_path: str | None, output_path: str,
     }
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # If no checkpoint: emit neutral dummy probs.
+    # A checkpoint is required because the model architecture and feature
+    # settings are recovered from its adjacent args.pkl file.
     if not (checkpoint_path and os.path.exists(checkpoint_path)):
         raise RuntimeError(f"checkpoint not found: {checkpoint_path}")
     else:
@@ -300,7 +300,7 @@ def run_inference(graph_dir: str, checkpoint_path: str | None, output_path: str,
 def main():
     ap = argparse.ArgumentParser(description="HyperCutNet inference: predict cut probabilities per net")
     ap.add_argument("--graph_dir", type=str, required=True, help="Dir with nodes.txt and hedges.txt")
-    ap.add_argument("--checkpoint", type=str, default=None, help="Model checkpoint .pth path")
+    ap.add_argument("--checkpoint", type=str, required=True, help="Model checkpoint .pth path")
     ap.add_argument("-o", "--output", type=str, required=True, help="Output cut probability file")
     ap.add_argument("--ub_factor", type=int, default=None,
                     help="Optional explicit UB value for one graph; default parses from graph_dir name")

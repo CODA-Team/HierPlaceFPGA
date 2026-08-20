@@ -41,13 +41,14 @@ def _node2vec_cache_path(graph_path, structure_key):
     Build disk cache path for node2vec embedding.
     Cache root prefers:
       1) $HYPERCUTNET_N2V_CACHE_DIR if set
-      2) fixed default: /home/thermal/FCCM/par/ML-SpecPart/HyperCutNet/node2vec_disk_cache
+      2) a ``node2vec_disk_cache`` directory next to this source tree
     """
     env_dir = os.environ.get("HYPERCUTNET_N2V_CACHE_DIR", "").strip()
     if env_dir:
         cache_root = env_dir
     else:
-        cache_root = "/home/thermal/FCCM/par/ML-SpecPart/HyperCutNet/node2vec_disk_cache"
+        hypercutnet_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        cache_root = os.path.join(hypercutnet_root, "node2vec_disk_cache")
     os.makedirs(cache_root, exist_ok=True)
     return os.path.join(cache_root, f"node2vec_{structure_key}.pt")
 
@@ -629,5 +630,4 @@ def buildGraphStructure(
 
     print(f'\t--- Structure: {g.num_nodes("pin")} Pin1s, {g.num_nodes("net")} Nets ---')
     return g
-
 

@@ -6,7 +6,7 @@
 #
 # Options:
 #   -o, --openroad PATH    Path to openroad binary (default: ../TritonPart/build/openroad)
-#   -c, --checkpoint PATH  HyperCutNet model checkpoint .pth (optional; if missing, uses dummy 0.5 probs)
+#   -c, --checkpoint PATH  HyperCutNet model checkpoint .pth (required)
 #   -n, --num_parts N      Number of partitions (default: 2)
 #   -b, --balance B        Balance constraint (default: 5)
 #   -r, --repeats N        Number of runs (default: 1)
@@ -18,8 +18,7 @@
 #   --guide_cutoverlay 0/1 Explicitly control cut-overlay guidance (default: 1)
 #
 # Example:
-#   ./run_guided_partition.sh ../TritonPart/test/sample.hgr
-#   ./run_guided_partition.sh -c model.pth ../TritonPart/test/sample.hgr
+#   ./run_guided_partition.sh -c checkpoints/model.pth ../TritonPart/test/sample.hgr
 
 set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -57,7 +56,7 @@ done
 if [[ -z "$HGR_FILE" ]]; then
   echo "Usage: $0 [options] <hgr_file>"
   echo "  -o, --openroad PATH    Path to openroad (default: TritonPart/build/openroad)"
-  echo "  -c, --checkpoint PATH  HyperCutNet checkpoint (optional)"
+  echo "  -c, --checkpoint PATH  HyperCutNet checkpoint (required)"
   echo "  -n, --num_parts N      Number of parts (default: 2)"
   echo "  -b, --balance B        Balance constraint (default: 5)"
   echo "  -r, --repeats N        Number of runs (default: 1)"
@@ -66,6 +65,11 @@ if [[ -z "$HGR_FILE" ]]; then
   echo "  --guide_coarsening 0/1 Explicitly control coarsening guidance (default: 1)"
   echo "  --guide_refinement 0/1 Explicitly control refinement guidance (default: 1)"
   echo "  --guide_cutoverlay 0/1 Explicitly control cut-overlay guidance (default: 1)"
+  exit 1
+fi
+
+if [[ -z "$CHECKPOINT" ]]; then
+  echo "Error: --checkpoint is required"
   exit 1
 fi
 
