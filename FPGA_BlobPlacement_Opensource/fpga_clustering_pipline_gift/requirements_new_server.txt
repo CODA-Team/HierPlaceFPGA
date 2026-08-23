@@ -1,0 +1,15 @@
+# Install PyTorch 1.7.1 through conda when possible; pip CUDA wheels for this old stack are fragile.
+# Recommended conda command is documented in MIGRATION_RUNBOOK_NEW_SERVER.md.
+numpy>=1.19,<1.24
+scipy>=1.5,<1.10
+matplotlib>=3.3
+scikit-network
+cairocffi>=0.9.0
+pkgconfig>=1.4.0
+pyunpack>=0.1.2
+patool>=1.12
+pycapnp
+python-igraph
+# gurobipy version should match the Gurobi installed on the new server.
+# Example: gurobipy==10.0.3 or gurobipy==11.0.3
+gurobipy

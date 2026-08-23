@@ -1,0 +1,2 @@
+/usr/bin/ar qc libfpga_interchange_capnp.a CMakeFiles/fpga_interchange_capnp.dir/__/__/interchange/LogicalNetlist.capnp.c++.o CMakeFiles/fpga_interchange_capnp.dir/__/__/interchange/PhysicalNetlist.capnp.c++.o CMakeFiles/fpga_interchange_capnp.dir/__/__/interchange/DeviceResources.capnp.c++.o CMakeFiles/fpga_interchange_capnp.dir/__/__/interchange/References.capnp.c++.o
+/usr/bin/ranlib libfpga_interchange_capnp.a

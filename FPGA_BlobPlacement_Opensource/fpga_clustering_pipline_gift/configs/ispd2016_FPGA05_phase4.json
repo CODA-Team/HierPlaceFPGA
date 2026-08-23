@@ -1,0 +1,52 @@
+{
+  "benchmark_dir": "data/ispd2016/FPGA05",
+  "output_dir": "outputs/ispd2016_FPGA05_phase4",
+  "aux": null,
+  "dreamplace_path": "tools/DREAMPlaceFPGA",
+  "clustering": {
+    "min_cluster_size": 337,
+    "resolution": 1.062341388894038,
+    "gift_scale": 0.599632013883368,
+    "ub_factor": 12,
+    "num_trees": 5,
+    "best_solns": 12,
+    "max_cluster_size": 2250,
+    "specpart_mode": "gift_then_spectral",
+    "specpart_timeout": 21600,
+    "specpart_per_job_timeout": 240,
+    "specpart_num_workers": 3,
+    "max_fanout": 150
+  },
+  "cluster_placement": {
+    "run_cluster_placement": true,
+    "cluster_iteration": 1000,
+    "place_density_lb_addon": 2.0868876089074524,
+    "sigma_ratio": 0.6494737788369305,
+    "gpu": 0,
+    "cluster_base_weight": 2.963738421488964,
+    "cluster_fixed_cluster_weight": 19.748178679498128,
+    "cluster_random_seed": 1674,
+    "max_fanout": 150
+  },
+  "net_reweighting": {
+    "intra_sub": 1.4423860832213171,
+    "intra": 1.1532243716426578,
+    "inter": 0.7248875225454047,
+    "density_skip_threshold": 1.3
+  },
+  "final_placement": {
+    "final_iteration": 2000,
+    "learning_rate": 0.013080584886744205,
+    "net_weight_anneal_iters": 250,
+    "density_weight": 79999999.99999993,
+    "node_area_adjust_overflow": 0.15,
+    "random_seed": 7116,
+    "routability_opt_flag": 1,
+    "gamma": 6.809759346743754
+  },
+  "misc": {
+    "visualize": false,
+    "run_final_placement": false,
+    "skip_clustering": false
+  }
+}

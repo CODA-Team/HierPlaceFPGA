@@ -1,0 +1,2 @@
+/usr/bin/ar qc libutility_cxx.a CMakeFiles/utility_cxx.dir/src/Msg.cpp.o
+/usr/bin/ranlib libutility_cxx.a

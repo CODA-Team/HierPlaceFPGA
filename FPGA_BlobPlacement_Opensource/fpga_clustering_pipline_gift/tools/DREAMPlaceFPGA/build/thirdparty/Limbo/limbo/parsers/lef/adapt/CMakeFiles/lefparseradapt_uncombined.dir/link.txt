@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblefparseradapt_uncombined.a CMakeFiles/lefparseradapt_uncombined.dir/LefDataBase.cc.o CMakeFiles/lefparseradapt_uncombined.dir/LefDriver.cc.o
+/usr/bin/ranlib liblefparseradapt_uncombined.a

@@ -1,0 +1,161 @@
+{
+  "hyperparameters": [
+    {
+      "name": "best_solns",
+      "type": "uniform_int",
+      "log": false,
+      "lower": 3,
+      "upper": 15,
+      "default": 5
+    },
+    {
+      "name": "max_fanout",
+      "type": "categorical",
+      "choices": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+      "default": 200
+    },
+    {
+      "name": "min_cluster_size",
+      "type": "uniform_int",
+      "log": false,
+      "lower": 10,
+      "upper": 1000,
+      "default": 40
+    },
+    {
+      "name": "resolution",
+      "type": "uniform_float",
+      "log": false,
+      "lower": 0.5,
+      "upper": 1.5,
+      "default": 1.0
+    },
+    {
+      "name": "gift_scale",
+      "type": "uniform_float",
+      "log": false,
+      "lower": 0.3,
+      "upper": 0.9,
+      "default": 0.5
+    },
+    {
+      "name": "ub_factor",
+      "type": "uniform_int",
+      "log": false,
+      "lower": 5,
+      "upper": 25,
+      "default": 10
+    },
+    {
+      "name": "max_cluster_size",
+      "type": "categorical",
+      "choices": [500, 750, 1000, 1250, 1500, 2000, 2250, 2500, 2750, 3000, 3500, 3750, 4000],
+      "default": 2000
+    },
+    {
+      "name": "place_density_lb_addon",
+      "type": "uniform_float",
+      "log": false,
+      "lower": 0.5,
+      "upper": 3.0,
+      "default": 1.5
+    },
+    {
+      "name": "sigma_ratio",
+      "type": "uniform_float",
+      "log": false,
+      "lower": 0.2,
+      "upper": 1.0,
+      "default": 0.9
+    },
+    {
+      "name": "cluster_base_weight",
+      "type": "uniform_float",
+      "log": false,
+      "lower": 0.1,
+      "upper": 5.0,
+      "default": 1.0
+    },
+    {
+      "name": "cluster_fixed_cluster_weight",
+      "type": "uniform_float",
+      "log": false,
+      "lower": 1.0,
+      "upper": 60.0,
+      "default": 5.0
+    },
+    {
+      "name": "intra_sub",
+      "type": "uniform_float",
+      "log": false,
+      "lower": 1.0,
+      "upper": 2.0,
+      "default": 1.2
+    },
+    {
+      "name": "intra",
+      "type": "uniform_float",
+      "log": false,
+      "lower": 0.4,
+      "upper": 1.5,
+      "default": 0.6
+    },
+    {
+      "name": "inter",
+      "type": "uniform_float",
+      "log": false,
+      "lower": 0.5,
+      "upper": 1.0,
+      "default": 0.8
+    },
+    {
+      "name": "learning_rate",
+      "type": "uniform_float",
+      "log": true,
+      "lower": 0.001,
+      "upper": 0.5,
+      "default": 0.01
+    },
+    {
+      "name": "net_weight_anneal_iters",
+      "type": "categorical",
+      "choices": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700],
+      "default": 200
+    },
+    {
+      "name": "density_weight",
+      "type": "categorical",
+      "choices": [
+        8e-2, 8e-1, 8e0, 8e1, 8e2, 8e3, 8e4,
+        8e5, 8e6, 8e7, 8e8, 8e9, 8e10
+      ],
+      "default": 8e-1
+    },
+    {
+      "name": "gamma",
+      "type": "uniform_float",
+      "log": false,
+      "lower": 0.01,
+      "upper": 50.0,
+      "default": 6.5
+    },
+    {
+      "name": "cluster_random_seed",
+      "type": "uniform_int",
+      "log": false,
+      "lower": 0,
+      "upper": 10000,
+      "default": 500
+    },
+    {
+      "name": "random_seed",
+      "type": "uniform_int",
+      "log": false,
+      "lower": 0,
+      "upper": 10000,
+      "default": 500
+    }
+  ],
+  "conditions": [],
+  "forbiddens": []
+}

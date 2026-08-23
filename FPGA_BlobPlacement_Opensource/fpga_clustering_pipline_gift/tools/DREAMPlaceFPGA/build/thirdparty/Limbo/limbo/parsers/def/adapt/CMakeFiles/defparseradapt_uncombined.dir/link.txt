@@ -1,0 +1,2 @@
+/usr/bin/ar qc libdefparseradapt_uncombined.a CMakeFiles/defparseradapt_uncombined.dir/DefDataBase.cc.o CMakeFiles/defparseradapt_uncombined.dir/DefDriver.cc.o
+/usr/bin/ranlib libdefparseradapt_uncombined.a

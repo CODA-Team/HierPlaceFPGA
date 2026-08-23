@@ -1,0 +1,27 @@
+name: fpga_cluster_place
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pytorch=1.7.1
+  - torchvision=0.8.2
+  - cudatoolkit=11.0
+  - numpy>=1.19,<1.24
+  - scipy>=1.5,<1.10
+  - matplotlib>=3.3
+  - cmake>=3.18
+  - make
+  - gcc_linux-64
+  - gxx_linux-64
+  - pip
+  - pip:
+      - scikit-network
+      - cairocffi>=0.9.0
+      - pkgconfig>=1.4.0
+      - pyunpack>=0.1.2
+      - patool>=1.12
+      - pycapnp
+      - python-igraph
+      - gurobipy
