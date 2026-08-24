@@ -8,18 +8,12 @@ partitioning, and the Julia SpecPart Cut-Overlay implementation.
 
 ```text
 ML-SpecPart/
-├── HyperCutNet/     # Python/DGL model, training and inference
-├── TritonPart/      # OpenROAD-based guided hypergraph partitioner
-├── SpecPart/        # Julia Cut-Overlay implementation
-├── checkpoints/     # released model checkpoints
-└── tools/           # conversion, inference, and orchestration scripts
+├── HyperCutNet/     # HyperCutNet GNN source code, configuration, training, and inference
+├── TritonPart/      # TritonPart/OpenROAD source code and bundled hypergraph benchmarks
+├── SpecPart/        # Julia implementation of the SpecPart Cut-Overlay stage
+├── checkpoints/     # Released HyperCutNet model checkpoints and their saved arguments
+└── tools/           # Data-conversion utilities and end-to-end orchestration scripts
 ```
-
-The repository contains source code and model checkpoints.  OpenROAD is built
-locally; generated builds, experiment outputs, and graph datasets are not
-tracked.  The three-model flow requires graph data in HyperCutNet format.  Put
-it under `datasets/hypercutnet/{ibm,titan}` or set `IBM_GRAPH_ROOT` and
-`TITAN_GRAPH_ROOT` explicitly.
 
 ## Requirements
 
@@ -124,27 +118,51 @@ bash tools/run_three_models_four_cases_ub01_20_cutoverlay.sh
 
 ## Training
 
-Run training from `HyperCutNet` so local imports resolve correctly:
+Run training from `HyperCutNet` so local imports resolve correctly.  Set the
+three variables below to paths appropriate for the local clone.  The checkpoint
+name is an output directory name, not an absolute path.
 
 ```bash
 cd ML-SpecPart/HyperCutNet
-python src/train.py \
-  --data_root rawdata \
-  --dataset_savepath dataset \
-  --checkpoint example_run \
-  --batch_size 4 --layers 3 --hidden_dim 128 --epochs 200 --lr 0.001
+
+PYTHON_BIN="$(command -v python)"
+DATA_ROOT="/path/to/training_rawdata"
+CHECKPOINT_NAME="pin2net_gat_grouped"
+CACHE_PREFIX="/path/to/cache/pin2net_gat_grouped"
+
+"$PYTHON_BIN" src/train_grouped.py \
+  --data_root "$DATA_ROOT" \
+  --checkpoint "$CHECKPOINT_NAME" \
+  --dataset_savepath "$CACHE_PREFIX" \
+  --batch_size 5 \
+  --hidden_dim 128 \
+  --layers 3 \
+  --epochs 100 \
+  --lr 0.0001 \
+  --use_pagerank \
+  --pin_struct_feat_mode hetero \
+  --prune_overlap_topk 50 \
+  --normalize_overlap_weights \
+  --use_ubfactor \
+  --ub_isolate \
+  --ub_max 20 \
+  --pin2net_type gat \
+  --pin2net_gat_heads 4 \
+  --pin2net_gat_chunk_nets 30000 \
+  --net2net_type graphconv \
+  --net2pin_type graphconv
 ```
+
+The command writes the checkpoint, saved arguments, and logs to
+`checkpoints/<CHECKPOINT_NAME>/`.  `CACHE_PREFIX` creates a pair of cached
+dataset files (`.design.bin` and `.solinfos.pt`).  Use a new cache prefix if
+any graph-construction option changes, such as PageRank, structural-feature
+mode, or overlap pruning.
+
+`--batch_size 5` is the number of solutions processed per design group, rather
+than the number of unrelated graphs.  Add `--grouped_encode_once` only when a
+single GNN encoding per design group is desired; it changes the optimizer-step
+granularity.
 
 See `HyperCutNet/README.md` for the input text format and optional model
 features.
-
-## Reproducibility notes
-
-- Do not rely on server-specific absolute paths; use the environment variables
-  documented by the shell scripts.
-- Keep generated outputs outside Git.  `.gitignore` covers standard build,
-  cache, and experiment directories.
-- The bundled checkpoints are small enough for ordinary Git.  Place future
-  checkpoints larger than 100 MB in Git LFS or a release asset.
-- The TritonPart/OpenROAD and SpecPart subcomponents retain their respective
-  upstream licenses in their directories.
